@@ -11,9 +11,9 @@ namespace GameLoops_KatelynNicholson_2025_11_03
         //map is blue
         //slow the shark so its not moving 1 tile per frame
         //premake map it will make it easier
-        //Water ░
-        //Island ▓
-        //Pickups ¿■? = $$$
+        //Water ░ BLUE
+        //Island ▓ GREEN
+        //Pickups ¿■? = $$$ //Orange or YELLOW
         //score tracker
         //Player Ö
         //Shark ^
@@ -57,11 +57,23 @@ namespace GameLoops_KatelynNicholson_2025_11_03
             //game loop
             while (isPlaying)
             {
+                //input
                 ProcessInput();
-                Update();
-                Draw();
-                
+                //move player
 
+                //update
+                Update();
+                //move shark
+
+                //check collisions, part of the unity flow
+                //UpdateCollision(); ?
+
+                //draw
+                Draw();
+                Console.WriteLine(map); //foreach
+
+                //repeat
+                
                 Thread.Sleep(tickMs); //gives the game a constant tick rate
 
             }
