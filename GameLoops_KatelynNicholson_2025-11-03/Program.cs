@@ -95,8 +95,8 @@ namespace GameLoops_KatelynNicholson_2025_11_03
 
             if (inputKey.Key == ConsoleKey.W) horizontalInput -= 1;
             if (inputKey.Key == ConsoleKey.A) horizontalInput += 1;
-            if (inputKey.Key == ConsoleKey.S) horizontalInput += 1;
-            if (inputKey.Key == ConsoleKey.D) horizontalInput -= 1;
+            if (inputKey.Key == ConsoleKey.S) horizontalInput -= 1;
+            if (inputKey.Key == ConsoleKey.D) horizontalInput += 1;
             if (inputKey.Key == ConsoleKey.Q) isPlaying = false;
 
         }
@@ -119,7 +119,22 @@ namespace GameLoops_KatelynNicholson_2025_11_03
         static void Draw(string[,] map)
         {
             //draw map forloop
-            
+            Console.SetCursorPosition(0, 3);
+            for (int y = 0; y < map.GetLength(0); y++)
+            {
+                for (int x = 0; x < map.GetLength(1); x++)
+                {
+                    if (y == verticalPos && x == horizontalPos)
+                    {
+                        Console.Write(player);
+                    }
+                    else
+                    {
+                        Console.Write(map[y,x]);
+                    }
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
