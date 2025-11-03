@@ -70,7 +70,7 @@ namespace GameLoops_KatelynNicholson_2025_11_03
 
                 //draw
                 Draw();
-                Console.WriteLine(map); //foreach
+                Draw(map); //foreach
 
                 //repeat
                 
@@ -114,6 +114,11 @@ namespace GameLoops_KatelynNicholson_2025_11_03
             Console.SetCursorPosition(0, 0);
             Console.WriteLine("Horizontal Position: " + horizontalPos + "      ");
             Console.WriteLine("Vertical Position: " + verticalPos + "      ");
+            
+        }
+        static void Draw(string[,] map)
+        {
+            //draw map forloop
             
         }
     }
