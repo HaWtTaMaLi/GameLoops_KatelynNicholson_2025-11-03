@@ -1,0 +1,8 @@
+C:\Katelyn's UnityProjects\GameLoops_KatelynNicholson_2025-11-03\GameLoops_KatelynNicholson_2025-11-03\bin\Debug\GameLoops_KatelynNicholson_2025-11-03.exe.config
+C:\Katelyn's UnityProjects\GameLoops_KatelynNicholson_2025-11-03\GameLoops_KatelynNicholson_2025-11-03\bin\Debug\GameLoops_KatelynNicholson_2025-11-03.exe
+C:\Katelyn's UnityProjects\GameLoops_KatelynNicholson_2025-11-03\GameLoops_KatelynNicholson_2025-11-03\bin\Debug\GameLoops_KatelynNicholson_2025-11-03.pdb
+C:\Katelyn's UnityProjects\GameLoops_KatelynNicholson_2025-11-03\GameLoops_KatelynNicholson_2025-11-03\obj\Debug\GameLoops_KatelynNicholson_2025-11-03.csproj.AssemblyReference.cache
+C:\Katelyn's UnityProjects\GameLoops_KatelynNicholson_2025-11-03\GameLoops_KatelynNicholson_2025-11-03\obj\Debug\GameLoops_KatelynNicholson_2025-11-03.csproj.CoreCompileInputs.cache
+C:\Katelyn's UnityProjects\GameLoops_KatelynNicholson_2025-11-03\GameLoops_KatelynNicholson_2025-11-03\obj\Debug\GameLoops_KatelynNicholson_2025-11-03.exe
+C:\Katelyn's UnityProjects\GameLoops_KatelynNicholson_2025-11-03\GameLoops_KatelynNicholson_2025-11-03\obj\Debug\GameLoops_KatelynNicholson_2025-11-03.pdb
+C:\Katelyn's UnityProjects\GameLoops_KatelynNicholson_2025-11-03\GameLoops_KatelynNicholson_2025-11-03\obj\Debug\GameLoops_KatelynNicholson_2025-11-03.exe.config

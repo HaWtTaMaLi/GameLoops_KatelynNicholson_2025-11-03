@@ -7,7 +7,16 @@ namespace GameLoops_KatelynNicholson_2025_11_03
 {
     internal class Program
     {
-
+        //green islands shark cant touch 
+        //map is blue
+        //slow the shark so its not moving 1 tile per frame
+        //premake map it will make it easier
+        //Water ░
+        //Island ▓
+        //Pickups ¿■? = $$$
+        //score tracker
+        //Player Ö
+        //Shark ^
         //keep track of if game is playing
         static bool isPlaying = true;
 
@@ -20,13 +29,34 @@ namespace GameLoops_KatelynNicholson_2025_11_03
         static int horizontalPos = 0;
         static int tickMs = 17;
 
+        //Currency
+        static int pickUP = 0;
+
+        //Objects
+        static string player = "Ö";
+        static string shark = "^";
+        static string pickUps = "¿■?";
+
+        //Map
+        static string[,] map = { 
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"}
+        };
+
         static void Main()
         {
-
             //game loop
             while (isPlaying)
             {
-
                 ProcessInput();
                 Update();
                 Draw();
@@ -69,7 +99,7 @@ namespace GameLoops_KatelynNicholson_2025_11_03
         static void Draw()
         {
 
-            Console.SetCursorPosition(0, 0);          
+            Console.SetCursorPosition(0, 0);
             Console.WriteLine("Horizontal Position: " + horizontalPos + "      ");
             Console.WriteLine("Vertical Position: " + verticalPos + "      ");
             
