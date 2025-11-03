@@ -8,15 +8,7 @@ namespace GameLoops_KatelynNicholson_2025_11_03
     internal class Program
     {
         //green islands shark cant touch 
-        //map is blue
-        //slow the shark so its not moving 1 tile per frame
-        //premake map it will make it easier
-        //Water ░ BLUE
-        //Island ▓ GREEN
-        //Pickups ¿■? = $$$ //Orange or YELLOW
         //score tracker
-        //Player Ö
-        //Shark ^
         //keep track of if game is playing
         static bool isPlaying = true;
 
@@ -28,6 +20,12 @@ namespace GameLoops_KatelynNicholson_2025_11_03
         static int verticalPos = 0;
         static int horizontalPos = 0;
         static int tickMs = 17;
+
+        //shark
+        static int sharkVertical = 5;
+        static int sharkHorizontal = 5;
+        static int sharkTickMs = 0;
+        static int sharkDelay = 10;
 
         //Currency
         static int pickUP = 0;
@@ -43,12 +41,12 @@ namespace GameLoops_KatelynNicholson_2025_11_03
         { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
         { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
         { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "▓░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░▓", "▓▓░░", "░▓▓░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "▓▓▓▓", "▓▓▓▓", "▓▓▓▓", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░▓▓", "▓▓▓▓", "▓▓▓▓", "▓▓▓▓", "▓░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░▓", "▓▓▓▓", "▓▓▓▓", "▓▓▓▓", "▓▓░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░▓", "▓▓░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
         { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"}
         };
 
@@ -102,9 +100,31 @@ namespace GameLoops_KatelynNicholson_2025_11_03
         }
         static void Update()
         {
-
             verticalPos += verticalInput;
             horizontalPos += horizontalInput;
+
+            verticalPos = Mathf.Clamp(verticalPos, 0, map.GetLength(0) - 1);
+            horizontalPos = Mathf.Clamp(horizontalPos, 0, map.GetLength(1) - 1);
+
+            sharkTickMs++;
+            if (sharkTickMs < sharkDelay) return;
+
+            sharkTickMs = 0;
+
+            if (sharkVertical < verticalPos) sharkVertial++;
+            else if (sharkHorizontal > horizontalPos) sharkHorizontal--;
+
+            if ((sharkHorizontal < horizontalPos) sharkHorizontal++;
+            if (sharkHorizontal < horizontalPos) sharkHorizontal--;
+
+            if (sharkVertical == verticalPos && sharlHorizontal == horizontalPos)
+            {
+                isPlaying = false;
+                Console.Clear();
+                Console.WriteLine("The shark got you! Game Over");
+                Console.WriteLine("Hit any key to exit.");
+                Console.ReadKey();
+            }
 
         }
 
@@ -122,17 +142,38 @@ namespace GameLoops_KatelynNicholson_2025_11_03
             Console.SetCursorPosition(0, 3);
             for (int y = 0; y < map.GetLength(0); y++)
             {
+
                 for (int x = 0; x < map.GetLength(1); x++)
                 {
+                    char tile = map[y,x];
+                    switch (tile)
+                    {
+                        case '░': //water
+                            Console.ForgroundColor = ConsoleColor.Blue; break;
+                        case '▓'; //islands
+                            Console.ForgroundColor = ConsoleColor.Green; break;
+                        case '¿■?'; //pickups
+                            Console.ForgorundColor = ConsoleColor.Yellow; break;
+                        case 'Ö'; //player
+                            Console.ForgroundColor = ConsoleColor.White; break;
+                        case ' '; //shark
+                            Console.ForgroundColor = ConsoleColor.White; break;
+                    }
+
+                    Console.Write(tile);
+                    Console.ResetColor();
+
                     if (y == verticalPos && x == horizontalPos)
-                    {
                         Console.Write(player);
-                    }
+
+                    else if (y == sharkVertical && x == sharkHorizontal)
+                        Console.Write(shark);
+                    
                     else
-                    {
-                        Console.Write(map[y,x]);
-                    }
+                        Console.Write(map[y, x]);
+
                 }
+
                 Console.WriteLine();
             }
         }
