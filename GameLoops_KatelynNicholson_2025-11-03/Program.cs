@@ -36,18 +36,17 @@ namespace GameLoops_KatelynNicholson_2025_11_03
         static string pickUps = "¿■?";
 
         //Map
-        static string[,] map = { 
+        static string[,] map = {
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "▓▓▓▓", "▓▓▓▓", "▓▓▓▓", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "▓▓▓▓", "▓▓▓▓", "░░░░"},
         { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
         { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
         { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░░", "░░░░", "▓░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░░", "░░░▓", "▓▓░░", "░▓▓░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
         { "░░░░", "░░░░", "▓▓▓▓", "▓▓▓▓", "▓▓▓▓", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░▓▓", "▓▓▓▓", "▓▓▓▓", "▓▓▓▓", "▓░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░▓", "▓▓▓▓", "▓▓▓▓", "▓▓▓▓", "▓▓░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░░", "░░░▓", "▓▓░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
-        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"}
+        { "░░░░", "░░░░", "▓▓▓▓", "▓▓▓▓", "▓▓▓▓", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "▓▓▓▓", "▓▓▓▓", "▓▓▓▓", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "▓▓▓▓"},
+        { "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "░░░░", "▓▓▓▓", "▓▓▓▓"},
         };
 
         static void Main()
@@ -71,7 +70,7 @@ namespace GameLoops_KatelynNicholson_2025_11_03
                 Draw(map); //foreach
 
                 //repeat
-                
+
                 Thread.Sleep(tickMs); //gives the game a constant tick rate
 
             }
@@ -91,9 +90,9 @@ namespace GameLoops_KatelynNicholson_2025_11_03
 
             ConsoleKeyInfo inputKey = Console.ReadKey(true);
 
-            if (inputKey.Key == ConsoleKey.W) horizontalInput -= 1;
-            if (inputKey.Key == ConsoleKey.A) horizontalInput += 1;
-            if (inputKey.Key == ConsoleKey.S) horizontalInput -= 1;
+            if (inputKey.Key == ConsoleKey.W) verticalInput -= 1;
+            if (inputKey.Key == ConsoleKey.A) horizontalInput -= 1;
+            if (inputKey.Key == ConsoleKey.S) verticalInput += 1;
             if (inputKey.Key == ConsoleKey.D) horizontalInput += 1;
             if (inputKey.Key == ConsoleKey.Q) isPlaying = false;
 
@@ -103,21 +102,37 @@ namespace GameLoops_KatelynNicholson_2025_11_03
             verticalPos += verticalInput;
             horizontalPos += horizontalInput;
 
-            verticalPos = Mathf.Clamp(verticalPos, 0, map.GetLength(0) - 1);
-            horizontalPos = Mathf.Clamp(horizontalPos, 0, map.GetLength(1) - 1);
+            verticalPos = Math.Min(Math.Max(verticalPos, 0), map.GetLength(0) - 1);
+            horizontalPos = Math.Min(Math.Max(horizontalPos, 0), map.GetLength(1) - 1);
 
             sharkTickMs++;
             if (sharkTickMs < sharkDelay) return;
 
             sharkTickMs = 0;
 
-            if (sharkVertical < verticalPos) sharkVertial++;
-            else if (sharkHorizontal > horizontalPos) sharkHorizontal--;
+            if (sharkVertical < verticalPos)
+            {
+                if (map[sharkVertical + 1, sharkHorizontal][0] != '▓')
+                    sharkVertical++;
+            }
+            else if (sharkHorizontal > horizontalPos)
+            {
+                if (map[sharkVertical - 1, sharkHorizontal][0] != '▓')
+                    sharkHorizontal--;
+            }
 
-            if ((sharkHorizontal < horizontalPos) sharkHorizontal++;
-            if (sharkHorizontal < horizontalPos) sharkHorizontal--;
+            if (sharkHorizontal < horizontalPos)
+            {
+                if (map[sharkVertical, sharkHorizontal + 1][0] != '▓')
+                    sharkHorizontal++;
+            }
+            else if (sharkHorizontal < horizontalPos)
+            {
+                if (map[sharkVertical, sharkHorizontal - 1][0] != '▓')
+                    sharkHorizontal--;
+            }
 
-            if (sharkVertical == verticalPos && sharlHorizontal == horizontalPos)
+            if (sharkVertical == verticalPos && sharkHorizontal == horizontalPos)
             {
                 isPlaying = false;
                 Console.Clear();
@@ -134,7 +149,7 @@ namespace GameLoops_KatelynNicholson_2025_11_03
             Console.SetCursorPosition(0, 0);
             Console.WriteLine("Horizontal Position: " + horizontalPos + "      ");
             Console.WriteLine("Vertical Position: " + verticalPos + "      ");
-            
+
         }
         static void Draw(string[,] map)
         {
@@ -145,19 +160,14 @@ namespace GameLoops_KatelynNicholson_2025_11_03
 
                 for (int x = 0; x < map.GetLength(1); x++)
                 {
-                    char tile = map[y,x];
+                    string tile = map[y, x];
                     switch (tile)
                     {
-                        case '░': //water
-                            Console.ForgroundColor = ConsoleColor.Blue; break;
-                        case '▓'; //islands
-                            Console.ForgroundColor = ConsoleColor.Green; break;
-                        case '¿■?'; //pickups
-                            Console.ForgorundColor = ConsoleColor.Yellow; break;
-                        case 'Ö'; //player
-                            Console.ForgroundColor = ConsoleColor.White; break;
-                        case ' '; //shark
-                            Console.ForgroundColor = ConsoleColor.White; break;
+                        case "░": //water
+                            Console.ForegroundColor = ConsoleColor.Blue; break;
+                        case "▓": //islands
+                            Console.ForegroundColor = ConsoleColor.Green; break;
+
                     }
 
                     Console.Write(tile);
@@ -168,7 +178,7 @@ namespace GameLoops_KatelynNicholson_2025_11_03
 
                     else if (y == sharkVertical && x == sharkHorizontal)
                         Console.Write(shark);
-                    
+
                     else
                         Console.Write(map[y, x]);
 
